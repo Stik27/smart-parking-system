@@ -1,0 +1,558 @@
+{
+  "info": {
+    "_postman_id": "68b3792a-dd07-4497-81e4-407ab6b1d940",
+    "name": "smart-parking-system",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "18368953"
+  },
+  "item": [
+    {
+      "name": "parking-management",
+      "item": [
+        {
+          "name": "createParkingLot1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"temporary parking lot\",\r\n    \"location\":\"Historical Boulevard, Sevastopol\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/admin/parking-lots",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "parking-lots"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "addLevelToLot1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"first floor\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/admin/parking-lots/{{lotId1}}/levels",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "parking-lots",
+                "{{lotId1}}",
+                "levels"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delLevelToLot1",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"temporary parking lot\",\r\n    \"location\":\"Historical Boulevard, Sevastopol\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/admin/parking-levels/{{level1inLot1}}",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "parking-levels",
+                "{{level1inLot1}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "addSlotinLvl1Lot1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"1A-Handicapped\",\r\n    \"slotType\":\"COMPACT\",\r\n    \"isHandicapped\":true\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/admin/parking-levels/{{level1inLot1}}/slots",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "parking-levels",
+                "{{level1inLot1}}",
+                "slots"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delSlotinLvl1Lot1",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"first floor\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/admin/slots/{{slot1lvl1}}",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "slots",
+                "{{slot1lvl1}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateSlotinLvl1Lot1",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{   \r\n    \"name\": \"1A -maintenance\",\r\n    \"isMaintenance\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/admin/slots/{{slot1lvl1}}",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "slots",
+                "{{slot1lvl1}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "createParkingLot2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"main parking lot\",\r\n    \"location\":\"55 Velyka Vasylkivska Street, Kyiv\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/admin/parking-lots",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "parking-lots"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delParkingLot2",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "localhost:8080/api/admin/parking-lots/{{lotId2}}",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "parking-lots",
+                "{{lotId2}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbl91c2VyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzY0MDc5NzA1LCJleHAiOjE5MjE4NDYxMDF9.3nfTwUjLSzEfNzhOYJ2gxQNYaYUFsLZn0C0eaqwARSU",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "vehicle-parking",
+      "item": [
+        {
+          "name": "check-in",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"parkingLotId\":\"92605115-d8e5-43a1-b1e1-7a5822584f4a\",\r\n    \"licensePlate\":\"KA1234MI\",\r\n    \"vehicleType\":\"CAR\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/parking/check-in",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "parking",
+                "check-in"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "check-in2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"parkingLotId\":\"92605115-d8e5-43a1-b1e1-7a5822584f4a\",\r\n    \"licensePlate\":\"KA7777MI\",\r\n    \"vehicleType\":\"CAR\",\r\n    \"isHandicapped\":true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/parking/check-in",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "parking",
+                "check-in"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "check-out",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "localhost:8080/api/parking/check-out/{{vehicleId2}}",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "parking",
+                "check-out",
+                "{{vehicleId2}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "auth": {
+        "type": "noauth"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "getParkingLots",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\":\"main parking lot\",\r\n    \"location\":\"55 Velyka Vasylkivska Street, Kyiv\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8080/api/parking-lots",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "parking-lots"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getActiveSessionByVehicleId",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "localhost:8080/api/check/{{vehicleId1}}",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "check",
+            "{{vehicleId1}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "lotId1",
+      "value": ""
+    },
+    {
+      "key": "level1inLot1",
+      "value": ""
+    },
+    {
+      "key": "slot1lvl1",
+      "value": ""
+    },
+    {
+      "key": "lotId2",
+      "value": ""
+    },
+    {
+      "key": "vehicleId1",
+      "value": ""
+    },
+    {
+      "key": "vehicleId2",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
