@@ -2,7 +2,7 @@ package io.github.stanislav.smartparkingsystem.mapper;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
 import io.github.stanislav.smartparkingsystem.controller.dto.parking.LevelInfo;
 import io.github.stanislav.smartparkingsystem.controller.dto.parking.ParkingAvailabilityResponse;
@@ -15,31 +15,20 @@ import io.github.stanislav.smartparkingsystem.repository.entity.ParkingLevelEnti
 import io.github.stanislav.smartparkingsystem.repository.entity.ParkingLotEntity;
 import io.github.stanislav.smartparkingsystem.repository.entity.ParkingSlotEntity;
 
-@Component
-public class ParkingMapper {
+@Mapper(componentModel = "spring")
+public interface ParkingMapper {
 
-	public ParkingSlot toDomain(ParkingSlotEntity entity) {
-		ParkingSlot domain = new ParkingSlot();
-		domain.setId(entity.getId());
-		domain.setName(entity.getName());
-		domain.setSlotType(entity.getSlotType());
-		domain.setHandicapped(entity.isHandicapped());
-		domain.setMaintenance(entity.isMaintenance());
-		domain.setOccupied(entity.isOccupied());
-		domain.setCurrentVehicleId(entity.getCurrentVehicleId());
-		return domain;
-	}
+	ParkingSlot toDomain(ParkingSlotEntity entity);
 
-	public ParkingLotResponse toLotResponse(ParkingLotEntity entity) {
+	default ParkingLotResponse toLotResponse(ParkingLotEntity entity) {
 		int totalSlots = entity.getLevels().stream()
 				.mapToInt(level -> level.getSlots().size())
 				.sum();
 
-		int availableSlots = entity.getLevels().stream()
+		int availableSlots = (int) entity.getLevels().stream()
 				.flatMap(level -> level.getSlots().stream())
 				.filter(ParkingSlotEntity::isAvailable)
-				.mapToInt(slot -> 1)
-				.sum();
+				.count();
 
 		return new ParkingLotResponse(
 				entity.getId(),
@@ -51,7 +40,7 @@ public class ParkingMapper {
 		);
 	}
 
-	public ParkingLevelResponse toLevelResponse(ParkingLevelEntity entity) {
+	default ParkingLevelResponse toLevelResponse(ParkingLevelEntity entity) {
 		int availableSlots = (int) entity.getSlots().stream()
 				.filter(ParkingSlotEntity::isAvailable)
 				.count();
@@ -65,7 +54,7 @@ public class ParkingMapper {
 		);
 	}
 
-	public ParkingAvailabilityResponse toAvailabilityResponse(List<ParkingLotEntity> entities) {
+	default ParkingAvailabilityResponse toAvailabilityResponse(List<ParkingLotEntity> entities) {
 		List<ParkingLotInfo> lotInfos = entities.stream()
 				.map(this::toLotInfo)
 				.toList();
@@ -73,16 +62,15 @@ public class ParkingMapper {
 		return new ParkingAvailabilityResponse(lotInfos);
 	}
 
-	private ParkingLotInfo toLotInfo(ParkingLotEntity entity) {
+	default ParkingLotInfo toLotInfo(ParkingLotEntity entity) {
 		int totalSlots = entity.getLevels().stream()
 				.mapToInt(level -> level.getSlots().size())
 				.sum();
 
-		int availableSlots = entity.getLevels().stream()
+		int availableSlots = (int) entity.getLevels().stream()
 				.flatMap(level -> level.getSlots().stream())
 				.filter(ParkingSlotEntity::isAvailable)
-				.mapToInt(slot -> 1)
-				.sum();
+				.count();
 
 		List<LevelInfo> levels = entity.getLevels().stream()
 				.map(this::toLevelInfo)
@@ -98,7 +86,7 @@ public class ParkingMapper {
 		);
 	}
 
-	private LevelInfo toLevelInfo(ParkingLevelEntity entity) {
+	default LevelInfo toLevelInfo(ParkingLevelEntity entity) {
 		int availableSlots = (int) entity.getSlots().stream()
 				.filter(ParkingSlotEntity::isAvailable)
 				.count();
@@ -116,7 +104,7 @@ public class ParkingMapper {
 		);
 	}
 
-	private SlotInfo toSlotInfo(ParkingSlotEntity entity) {
+	default SlotInfo toSlotInfo(ParkingSlotEntity entity) {
 		return new SlotInfo(
 				entity.getId(),
 				entity.getName(),
